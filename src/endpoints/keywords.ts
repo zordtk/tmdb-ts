@@ -4,8 +4,8 @@ import { BelongingMovies, Keyword, KeywordsOptions } from '../types';
 const BASE_Keyword = '/keyword';
 
 export class KeywordsEndpoint extends BaseEndpoint {
-  constructor(accessToken: string) {
-    super(accessToken);
+  constructor(accessToken: string, rateLimit?: number) {
+    super(accessToken, rateLimit);
   }
 
   async details(keywordId: number): Promise<Keyword> {

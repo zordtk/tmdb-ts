@@ -4,16 +4,17 @@ import { ErrorResponse } from './types';
 import { BASE_URL_V3 } from './common/constants';
 
 export class Api {
-  constructor(private accessToken: string) {
+  constructor(private accessToken: string, private rateLimit?: number) {
     this.accessToken = accessToken;
+    this.rateLimit = rateLimit;
   }
 
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   private requestTimestamps: number[] = [];
 
-  async get<T>(path: string, options?: Record<string, any>, rateLimit?: number): Promise<T> {
-    if (rateLimit) {
-      await this.enforceRateLimit(rateLimit);
+  async get<T>(path: string, options?: Record<string, any>): Promise<T> {
+    if (this.rateLimit) {
+      await this.enforceRateLimit(this.rateLimit);
     }
 
     const params = parseOptions(options);

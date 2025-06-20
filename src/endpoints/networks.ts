@@ -3,8 +3,8 @@ import { AlternativeNames } from './../types/companies';
 import { BaseEndpoint } from './base';
 
 export class NetworksEndpoint extends BaseEndpoint {
-  constructor(protected readonly accessToken: string) {
-    super(accessToken);
+  constructor(protected readonly accessToken: string, protected readonly rateLimit?: number) {
+    super(accessToken, rateLimit);
   }
 
   async details(id: number): Promise<NetworkDetails> {

@@ -2,8 +2,8 @@ import { ChangeOption, MediaChanges } from '../types';
 import { BaseEndpoint } from './base';
 
 export class ChangeEndpoint extends BaseEndpoint {
-  constructor(protected readonly accessToken: string) {
-    super(accessToken);
+  constructor(protected readonly accessToken: string, protected readonly rateLimit?: number) {
+    super(accessToken, rateLimit);
   }
 
   async movies(options?: ChangeOption): Promise<MediaChanges> {

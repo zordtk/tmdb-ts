@@ -6,8 +6,8 @@ export interface Genres {
 }
 
 export class GenreEndpoint extends BaseEndpoint {
-  constructor(protected readonly accessToken: string) {
-    super(accessToken);
+  constructor(protected readonly accessToken: string, protected readonly rateLimit?: number) {
+    super(accessToken, rateLimit);
   }
 
   async movies(options?: LanguageOption): Promise<Genres> {

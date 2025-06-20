@@ -35,8 +35,8 @@ export interface TvSeasonVideoSearchOptions extends LanguageOption {
 }
 
 export class TvSeasonsEndpoint extends BaseEndpoint {
-  constructor(accessToken: string) {
-    super(accessToken);
+  constructor(accessToken: string, rateLimit?: number) {
+    super(accessToken, rateLimit);
   }
 
   async details<T extends AppendToResponseTvSeasonKey[] | undefined>(

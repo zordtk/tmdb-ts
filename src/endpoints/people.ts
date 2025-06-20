@@ -21,8 +21,8 @@ import { BaseEndpoint } from './base';
 const BASE_PERSON = '/person';
 
 export class PeopleEndpoint extends BaseEndpoint {
-  constructor(accessToken: string) {
-    super(accessToken);
+  constructor(accessToken: string, rateLimit?: number) {
+    super(accessToken, rateLimit);
   }
 
   async details<T extends AppendToResponsePersonKey[] | undefined>(

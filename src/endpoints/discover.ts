@@ -9,8 +9,8 @@ import { BaseEndpoint } from './base';
 const BASE_DISCOVER = '/discover';
 
 export class DiscoverEndpoint extends BaseEndpoint {
-  constructor(accessToken: string) {
-    super(accessToken);
+  constructor(accessToken: string, rateLimit?: number) {
+    super(accessToken, rateLimit);
   }
 
   async movie(options?: MovieQueryOptions): Promise<MovieDiscoverResult> {

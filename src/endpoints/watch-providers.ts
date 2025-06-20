@@ -9,8 +9,8 @@ import {
 type ProviderOptions = WatchRegionOption & LanguageOption;
 
 export class WatchProvidersEndpoint extends BaseEndpoint {
-  constructor(protected readonly accessToken: string) {
-    super(accessToken);
+  constructor(protected readonly accessToken: string, protected readonly rateLimit?: number) {
+    super(accessToken, rateLimit);
   }
 
   async getRegions(options?: LanguageOption): Promise<RegionResult> {

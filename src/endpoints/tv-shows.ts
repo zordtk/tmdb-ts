@@ -37,8 +37,8 @@ import {
 const BASE_TV = '/tv';
 
 export class TvShowsEndpoint extends BaseEndpoint {
-  constructor(protected readonly accessToken: string) {
-    super(accessToken);
+  constructor(protected readonly accessToken: string, protected readonly rateLimit?: number) {
+    super(accessToken, rateLimit);
   }
 
   async details<T extends AppendToResponseTvKey[] | undefined>(
