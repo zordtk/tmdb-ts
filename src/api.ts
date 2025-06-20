@@ -9,7 +9,13 @@ export class Api {
   }
 
   /* eslint-disable  @typescript-eslint/no-explicit-any */
-  async get<T>(path: string, options?: Record<string, any>): Promise<T> {
+  private requestTimestamps: number[] = [];
+
+  async get<T>(path: string, options?: Record<string, any>, rateLimit?: number): Promise<T> {
+    if (rateLimit) {
+      await this.enforceRateLimit(rateLimit);
+    }
+
     const params = parseOptions(options);
     const response = await fetch(`${BASE_URL_V3}${path}?${params}`, {
       method: 'GET',
@@ -24,5 +30,19 @@ export class Api {
     }
 
     return (await response.json()) as T;
+  }
+
+  private async enforceRateLimit(rateLimit: number): Promise<void> {
+    const now = Date.now();
+    const oneSecondAgo = now - 1000;
+    
+    this.requestTimestamps = this.requestTimestamps.filter(timestamp => timestamp > oneSecondAgo);
+    
+    if (this.requestTimestamps.length >= rateLimit) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return this.enforceRateLimit(rateLimit);
+    }
+    
+    this.requestTimestamps.push(now);
   }
 }
